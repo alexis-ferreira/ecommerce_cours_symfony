@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% block TitrePage %}{{ parent() }}Ajouter un article{% endblock %}
+
 {% block body %}
-
     {# {{ form(form) }} GENERE L'INTEGRALITE DU FORMULAIRE#}
-    {{ form_start(form) }}
-    <label for="">Nom de l'article</label>
-    {{ form_row(form.nom) }}
+    <div class="col-md-8 mx-auto">
+        {{ form_start(form) }}
+        <label for="">Nom de l'article</label>
+        {{ form_row(form.nom) }}
 
-    <label for="">Prix de l'article</label>
-    {{ form_row(form.prix) }}
+        <label for="">Prix de l'article</label>
+        {{ form_row(form.prix) }}
 
-    {{ form_row(form.photo) }}
+        {{ form_row(form.photo) }}
 
 
-    {{ form_row(form.Valider) }}
+        {{ form_row(form.Valider) }}
 
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 
 {% endblock %}
 
 {% block title %}
-
+    Ajouter un article
 {% endblock %}
 

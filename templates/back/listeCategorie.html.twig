@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-
-{% endblock %}
-
 {% block body %}
 
     {% for message in app.flashes("success") %}
@@ -22,26 +18,26 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nom</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Photo</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
-        {% for article in articles %}
+        {% for categorie in categories %}
             <tr>
-                <th>{{ article.id }}</th>
-                <td>{{ article.nom }}</td>
-                <td>{{ article.prix }} €</td>
-                <td><img height="40" width="40" src="{{ asset('upload/') }}{{ article.photo }}" alt=""></td>
+                <th>{{ categorie.id }}</th>
+                <td>{{ categorie.nom }}</td>
                 <td>
-                    <a href="{{ path('modifArticle', {'id':article.id}) }}" type="button" class="btn btn-primary btn-sm me-2">Modifier</a>
-                    <a href="{{ path('deleteArticle', {'id':article.id}) }}" type="button" class="btn btn-danger btn-sm">Supprimer</a>
+                    <a href="{{ path('modifCategorie', {'id':categorie.id}) }}" type="button" class="btn btn-primary btn-sm me-2">Modifier</a>
+                    <a href="{{ path('deleteCategorie', {'id':categorie.id}) }}" type="button" class="btn btn-danger btn-sm">Supprimer</a>
                 </td>
             </tr>
+
         {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}
+
+    {% block title %}
+
+    {% endblock %}
 

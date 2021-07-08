@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Bijouterie | {% endblock %}</title>
+    <title>{% block title %}Bijoujoux | {% endblock %}</title>
     {# Run `composer require symfony/webpack-encore-bundle`
        and uncomment the following Encore helpers to start using Symfony UX #}
     {% block stylesheets %}
@@ -18,7 +18,7 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Bijoujoux</a>
+            <a class="navbar-brand" href="{{ path('home') }}">Bijoujoux</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,30 +26,22 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('addArticle') }}">Ajouter un article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                           aria-haspopup="true" aria-expanded="false">ADMIN</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="{{ path('addArticle') }}">Ajouter un article</a>
+                            <a class="dropdown-item" href="{{ path('listeArticle') }}">Liste des articles</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('home') }}">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                        <a class="nav-link" href="#">About</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -67,9 +59,12 @@
         </div>
     </div>
 </div>
+
+<main class="col-md-10 mx-auto">
 {% block body %}
 
 {% endblock %}
+</main>
 {% block javascripts %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"

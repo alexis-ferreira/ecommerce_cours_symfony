@@ -6,6 +6,17 @@
 
 {% block body %}
 
+    {% for message in app.flashes("success") %}
+
+        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+    {% for message in app.flashes("danger") %}
+
+        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -24,7 +35,8 @@
                 <td>{{ article.prix }} €</td>
                 <td><img height="40" width="40" src="{{ asset('upload/') }}{{ article.photo }}" alt=""></td>
                 <td>
-                    <button type="button" class="btn btn-primary text-light text-decoration-none">Button</button>
+                    <a href="{{ path('modifArticle', {'id':article.id}) }}" type="button" class="btn btn-primary">Modifier</a>
+                    <a href="{{ path('deleteArticle', {'id':article.id}) }}" type="button" class="btn btn-danger ms-2">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

@@ -37,6 +37,9 @@ class Article
      */
     private $photo;
 
+    // Propriété pour gérer la modification de photo dans le formulaire qui n'est pas reliée à la BDD (n'a pas en paramètre @ORM\column)
+    public $photoModif;
+
     public function getId(): ?int
     {
         return $this->id;

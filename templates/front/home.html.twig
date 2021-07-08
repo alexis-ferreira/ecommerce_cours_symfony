@@ -4,7 +4,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="row justify-content-between">
+    {% for message in app.flashes("success") %}
+
+        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+    {% for message in app.flashes("danger") %}
+
+        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+    <div class="row justify-content-start">
         {% for article in articles %}
             <div class="col-md-3 mb-4">
                 <div class="card mb-3">

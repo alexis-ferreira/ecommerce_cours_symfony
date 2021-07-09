@@ -40,6 +40,11 @@ class Article
     // Propriété pour gérer la modification de photo dans le formulaire qui n'est pas reliée à la BDD (n'a pas en paramètre @ORM\column)
     public $photoModif;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="articles")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +94,18 @@ class Article
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

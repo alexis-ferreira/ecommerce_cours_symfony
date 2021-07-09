@@ -12,19 +12,22 @@
         <label for="">Prix de l'article</label>
         {{ form_row(form.prix) }}
 
+        <label for="">Categorie de l'article</label>
+        {{ form_row(form.categorie) }}
+
         {{ form_row(form.photoModif, { 'attr':{"onChange": "loadFile(event)"} }  ) }}
 
         <div class="justify-content-between row mx-auto">
-            <div class="col-5 text-center">
+            <div class="col-5 text-center border">
 
                 <img style='width:300px' src="{{ asset('upload/') }}{{ article.photo }}">
 
             </div>
-            <div class="arrow col-2 d-flex align-items-center">
+            <div class="arrow col-2 d-flex align-items-center justify-content-center">
                 <i class="fas fa-arrow-right" style="font-size: 50px"></i>
             </div>
 
-            <div class="col-5 text-center justify-content-center align-items-center">
+            <div class="col-5 text-center justify-content-center align-items-center border">
 
                 <img id="image" style='width:300px'>
 

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -39,7 +41,12 @@ class ArticleType extends AbstractType
                     'required' => false,
                     'label' => false
                 ])
-                ->add("Valider", SubmitType::class);
+                ->add("Valider", SubmitType::class)
+                ->add('categorie', EntityType::class, [
+                    "label" => false,
+                    "class" => Categorie::class,
+                    "choice_label" => "nom"
+                ]);
 
         else:
 
@@ -65,8 +72,12 @@ class ArticleType extends AbstractType
                     'required' => false,
                     'label' => false
                 ])
-                ->add("Valider", SubmitType::class);
-
+                ->add("Valider", SubmitType::class)
+                ->add('categorie', EntityType::class, [
+                    "label" => false,
+                    "class" => Categorie::class,
+                    "choice_label" => "nom"
+                ]);
 
         endif;
     }

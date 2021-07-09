@@ -12,6 +12,9 @@
         <label for="">Prix de l'article</label>
         {{ form_row(form.prix) }}
 
+        <label for="">Categorie de l'article</label>
+        {{ form_row(form.categorie) }}
+
         {{ form_row(form.photo, { 'attr':{"onChange": "loadFile(event)"} }  ) }}
 
         <div class="col-md-12 text-center">

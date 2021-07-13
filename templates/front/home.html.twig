@@ -26,7 +26,9 @@
                     <div class="card-body">
                         <div class="btn-group-vertical">
                             <button type="button" class="btn btn-primary">
-                                <a href="#" class="card-link text-light text-decoration-none fs-6">Ajouter au panier</a>
+                                <a href="{{ path('addPanier', {id: article.id}) }}" class="card-link text-light text-decoration-none fs-6">
+                                    <i class="fas fa-cart-plus"></i>
+                                    &nbsp;Ajouter au panier</a>
                             </button>
                         </div>
                     </div>

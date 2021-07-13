@@ -2,15 +2,36 @@ security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+    # Ici on définit un encoder, on lui précise l'algorithm à utiliser pour le hashage et sur quelle Entity il devra appliquer l'algorithm
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    # Les providers permettent de préciser à Symfony ou sont stockées les données à controller
     providers:
-        users_in_memory: { memory: null }
+        in_database:
+            entity:
+                class: App\Entity\User
+
+
+    # firewall => Quelle partie du site on va protéger et par quel moyen
+    # On précise à Symfony la protection par rapport à notre provider in_database
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: in_database
+
+            form_login:
+                login_path: login
+                check_path: login
+
+            logout:
+                path: logout
+                target: home
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

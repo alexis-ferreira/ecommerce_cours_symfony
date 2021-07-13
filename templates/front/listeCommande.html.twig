@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes("success") %}
+
+        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+    {% for message in app.flashes("danger") %}
+
+        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+
+    <div class="container bg-secondary text-center fs-3 mb-4">Historique de vos commandes</div>
+    {% for commande in commandes %}
+
+        <div class="container-table col-10 mx-auto">
+            <table class="table">
+                <thead>
+                <tr class="bg-primary text-light">
+                    <th scope="col">Article</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix unitaire</th>
+                    <th scope="col">Prix total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in commande.achats %}
+                    <tr>
+                        <td><img height="40" width="40" src="{{ asset('upload/') }}{{ item.article.photo }}" alt="">&nbsp;{{ item.article.nom }}
+                        </td>
+                        <td>{{ item.quantite }}</td>
+                        <td>{{ item.article.prix }}€</td>
+                        <td>{{ item.article.prix * item.quantite }}€</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="total col-10 mt-4 mx-auto d-flex justify-content-between">
+            <div class="col-md-8 mt-2"><h4>Total de la commande : {{ commande.montantTotal }} €</h4></div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

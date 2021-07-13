@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class CategorieType extends AbstractType
 {
@@ -16,15 +15,13 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-
-                "required" => false,
-                "label" => false,
-                "attr" => [
-                    "placeholder" => "Veuillez saisir le nom de la catégorie"
+                "required"=>false,
+                "label"=>false,
+                "attr"=>[
+                    "placeholder"=>"Veuillez saisir le nom de la catégorie"
                 ]
             ])
-
-            ->add("Valider", SubmitType::class)
+            ->add('Valider', SubmitType::class)
         ;
     }
 

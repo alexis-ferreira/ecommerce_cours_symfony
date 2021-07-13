@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.flashes("success") %}
+
+        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+    {% for message in app.flashes("danger") %}
+
+        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+
+    {% endfor %}
+
+    <div class="container-table col-10 mx-auto">
+    {% if panier is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Article</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix unitaire</th>
+                <th scope="col">Prix total</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in panier %}
+                <tr>
+                    <td><img height="40" width="40" src="{{ asset('upload/') }}{{ item.article.photo }}"
+                             alt="">&nbsp;{{ item.article.nom }}</td>
+                    <td>{{ item.article.prix }}€</td>
+                    <td>{{ item.article.prix * item.quantite }}€</td>
+                    <td>
+                        <div class="pagination pagination-sm page-item active">
+                            <a href="{{ path('removePanier', {id:item.article.id}) }}"
+                               class="page-link btn-sm me-3">-</a>
+                            {{ item.quantite }}
+                            <a href="{{ path('addPanier', {id:item.article.id}) }}" class="page-link btn-sm ms-3">+</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{{ path('deleteArticlePanier', {'id': item.article.id}) }}" type="button"
+                           class="btn btn-danger btn-sm">Retirer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="total col-10 mt-4 mx-auto d-flex justify-content-between">
+            <div>Total de la commande : {{ total }} €</div>
+            <div><a href="{{ path('deletePanier') }}" type="button" class="btn btn-danger btn-sm">Vider le panier</a>
+            </div>
+        </div>
+        {% if app.user %}
+
+            <div class="col-10 mt-4 mx-auto">
+                <a href="{{ path('commande') }}" type="button" class="btn btn-success btn-sm">Commander</a>
+            </div>
+
+        {% else %}
+
+            <div class="col-md-4 mt-4 mx-auto">
+                <a href="{{ path('login') }}">
+                    <button class="btn btn-success">Connectez-vous pour passer à la commande</button>
+                </a>
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <div>Votre panier est vide</div>
+
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}

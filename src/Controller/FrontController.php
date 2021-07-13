@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-use DateTime;
+use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,22 +14,44 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FrontController extends AbstractController
 {
+
     /**
      * @Route("/", name="home")
-     * @param ArticleRepository $articleRepository
-     * @return Response
      */
-    public function home(ArticleRepository $articleRepository) // On injecte en dépendance le repository d'Article pour pouvoir hériter des méthodes présente à l'interieur.
+    public function home(ArticleRepository $articleRepository) //on injecte en dépendance le repository d'article pour pouvoir hériter des méthodes présentes dedans
     {
-        // Le repository est obligatoirement appelé pour les requêtes de SELECT
+        // le repository est obligatoirement appelé pour les requete de SELECT
 
-        $articles = $articleRepository->findAll();
+        $articles=$articleRepository->findAll();
 
 
 
-        return $this->render("front/home.html.twig", [
+        return $this->render('front/home.html.twig', [
 
-            "articles" => $articles
+            'articles'=>$articles
+        ]);
+
+    }
+
+    /**
+     * @Route ("/panier", name="panier")
+     */
+    public function panier(PanierService $panierService)
+    {
+        $panier=$panierService->getFullPanier();
+        $total=$panierService->getTotal();
+
+        return $this->render("front/panier.html.twig", [
+            'panier'=>$panier,
+            'total'=>$total
+
         ]);
     }
-} // FIN DE LA CLASS
+
+
+
+
+
+
+
+}

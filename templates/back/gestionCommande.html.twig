@@ -15,7 +15,8 @@
     <div class="container bg-secondary text-center fs-3 mb-4">Gestion des commandes</div>
     {% for commande in commandes %}
 
-        <h4>Commande N°{{ commande.id }}, du {{ commande.date | date('d/m/Y') }} à {{ commande.date | date('h:i')}}</h4>
+        <h4 class="mb-4">Commande N°{{ commande.id }}, du {{ commande.date | date('d/m/Y') }}
+            à {{ commande.date | date('h:i') }}</h4>
         <div class="container-table col-10 mx-auto">
             <table class="table">
                 <thead>
@@ -40,7 +41,31 @@
             </table>
         </div>
         <div class="total col-10 mt-4 mx-auto d-flex justify-content-between">
-            <div class="col-md-8 mt-2"><h4>Total de la commande : {{ commande.montantTotal }} €</h4></div>
+            <div class="col-md-8 mt-2">
+                <h4>Total de la commande : {{ commande.montantTotal }} €</h4>
+
+                {% if commande.statut == 0 %}
+
+                    <a href="{{ path('statut', {id:commande.id, param: 1}) }}" class="btn btn-primary">Prendre en
+                        charge</a>
+
+                {% elseif commande.statut == 1 %}
+
+                    <a href="{{ path('statut', {id:commande.id, param: 2}) }}" class="btn btn-info">Marquer comme
+                        "Expédié"</a>
+
+                {% elseif commande.statut == 2 %}
+
+                    <a href="{{ path('statut', {id:commande.id, param: 3}) }}" class="btn btn-info">Marquer comme
+                        "Livré"</a>
+
+                {% else %}
+                    <div class="bg-success text-light col-4 d-flex align-items-center" style="height: 50px;">
+                        <div class="mx-auto">Commande terminée</div>
+                    </div>
+
+                {% endif %}
+            </div>
         </div>
 
     {% endfor %}

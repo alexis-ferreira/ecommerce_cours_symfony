@@ -13,6 +13,8 @@ use App\Repository\CategorieRepository;
 use App\Repository\CommandeRepository;
 use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
+use Swift_Mailer;
+use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -352,7 +354,7 @@ class BackController extends AbstractController
     public function listeCommande(CommandeRepository $commandeRepository)
     {
 
-        $commandes = $commandeRepository->findBy(['user'=>$this->getUser()]);
+        $commandes = $commandeRepository->findBy(['user' => $this->getUser()]);
 
         return $this->render("front/listeCommande.html.twig", [
 
@@ -374,6 +376,42 @@ class BackController extends AbstractController
 
             "commandes" => $commandes
         ]);
+    }
+
+    /**
+     * @Route("/statut/{id}/{param}", name="statut")
+     * @param CommandeRepository $commandeRepository
+     * @param EntityManagerInterface $manager
+     * @param $id
+     * @param $param
+     * @return RedirectResponse
+     */
+
+    public function statut(CommandeRepository $commandeRepository, EntityManagerInterface $manager, $id, $param)
+    {
+
+        $commande = $commandeRepository->find($id);
+        $commande->setStatut($param);
+
+        $manager->persist($commande);
+        $manager->flush();
+
+        return $this->redirectToRoute("gestionCommande");
+    }
+
+    /**
+     * @Route("/sendMail", name="sendMail")
+     */
+    public function sendMail()
+    {
+
+        $transporter = (new Swift_SmtpTransport("smtp.gmail.com", 465, 'ssl'))
+            ->setUsername('767paris4@gmail.com')
+            ->setPassword('Session767Paris4');
+
+        $mailer = new Swift_Mailer($transporter);
+
+        return $this->render("");
     }
 
 

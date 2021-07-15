@@ -53,9 +53,15 @@ class Article
      */
     private $achats;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Matiere::class, mappedBy="article")
+     */
+    private $matieres;
+
     public function __construct()
     {
         $this->achats = new ArrayCollection();
+        $this->matieres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +151,33 @@ class Article
     {
         if ($this->achats->removeElement($achat)) {
             $achat->removeArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Matiere[]
+     */
+    public function getMatieres(): Collection
+    {
+        return $this->matieres;
+    }
+
+    public function addMatiere(Matiere $matiere): self
+    {
+        if (!$this->matieres->contains($matiere)) {
+            $this->matieres[] = $matiere;
+            $matiere->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatiere(Matiere $matiere): self
+    {
+        if ($this->matieres->removeElement($matiere)) {
+            $matiere->removeArticle($this);
         }
 
         return $this;

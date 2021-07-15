@@ -47,7 +47,7 @@
                         <h5 class="card-title" style="min-height: 38px">{{ article.nom }}</h5>
                         <div class="border border-dark"></div>
                     </div>
-                    <img class="mx-auto" height="250px" width="250px" src="{{ asset('upload/') }}{{ article.photo }}" alt="">
+                    <img class="mx-auto" height="250px" width="250px" src="{{ article.photo }}" alt="">
                     <div class="card-body">
                         <div class="btn-group-vertical">
                             <button type="button" class="btn btn-primary">
@@ -63,6 +63,11 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+    <div class="row justify-content-center mb-5">
+        <div class="pagination-small ps-5 col-md-4 text-center">
+            {{ knp_pagination_render(articles) }}
+        </div>
     </div>
     <script>
         const

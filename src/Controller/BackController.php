@@ -6,11 +6,14 @@ use App\Entity\Achat;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\Commande;
+use App\Entity\Matiere;
 use App\Form\ArticleType;
 use App\Form\CategorieType;
+use App\Form\MatiereType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommandeRepository;
+use App\Repository\MatiereRepository;
 use App\Repository\UserRepository;
 use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -317,6 +320,7 @@ class BackController extends AbstractController
      * @param PanierService $panierService
      * @param SessionInterface $session
      * @param EntityManagerInterface $manager
+     * @return RedirectResponse
      */
     public function commande(PanierService $panierService, SessionInterface $session, EntityManagerInterface $manager)
     {
@@ -408,6 +412,7 @@ class BackController extends AbstractController
     /**
      * @Route("/sendMail", name="sendMail")
      * @param Request $request
+     * @return RedirectResponse
      */
     public function sendMail(Request $request)
     {
@@ -593,7 +598,7 @@ class BackController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
 
-                $this->addFlash("success","Votre mot de passe à bien été modifié");
+                $this->addFlash("success", "Votre mot de passe à bien été modifié");
 
                 return $this->render("security/login.html.twig", [
                     "id" => $user->getId()
@@ -609,6 +614,100 @@ class BackController extends AbstractController
         endif;
 
         return $this->render("security/resetPassword.html.twig");
+    }
+
+    /**
+     * @Route("/addMatiere", name="addMatiere")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function addMatiere(Request $request, EntityManagerInterface $manager)
+    {
+
+        $matiere = new Matiere();
+
+        $form = $this->createForm(MatiereType::class, $matiere);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+
+            $manager->persist($matiere);
+            $manager->flush();
+
+            $this->addFlash("success", "La matière à bien été ajouté");
+
+        else:
+
+            $this->addFlash("error", "Un problème est survenue lors de l'ajout");
+        endif;
+
+        return $this->render("back/addMatiere.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/listeMatiere", name="listeMatiere")
+     * @param MatiereRepository $matiereRepository
+     * @return Response
+     */
+    public function listeMatiere(MatiereRepository $matiereRepository)
+    {
+
+        $matieres = $matiereRepository->findAll();
+
+        return $this->render("back/listeMatiere.html.twig", [
+
+            "matieres" => $matieres
+        ]);
+    }
+
+    /**
+     * @Route("/modifMatiere/{id}", name="modifMatiere")
+     * @param Matiere $matiere
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function modifMatiere(Matiere $matiere, Request $request, EntityManagerInterface $manager)
+    {
+
+        $form = $this->createForm(MatiereType::class, $matiere);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()):
+
+            $manager->persist($matiere);
+            $manager->flush();
+
+            $this->addFlash('success', 'La matière a bien été modifié');
+
+            return $this->redirectToRoute("listeMatiere");
+        endif;
+
+        return $this->render('back/modifMatiere.html.twig', [
+
+            'form' => $form->createView(),
+            'matieres' => $matiere
+        ]);
+    }
+
+    /**
+     * @Route("/deleteMatiere/{id}", name="deleteMatiere")
+     * @param EntityManagerInterface $manager
+     * @param Matiere $matiere
+     * @return Response
+     */
+    public function deleteMatiere(EntityManagerInterface $manager, Matiere $matiere)
+    {
+
+        $manager->remove($matiere);
+        $manager->flush();
+        $this->addFlash('success', 'La matière a bien été supprimée');
+
+        return $this->redirectToRoute("listeMatiere");
     }
 
 }

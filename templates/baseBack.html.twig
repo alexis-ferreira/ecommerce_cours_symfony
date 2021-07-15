@@ -31,15 +31,21 @@
         <a class="dropdown-item py-2" href="{{ path('listeArticle') }}">Liste des articles</a>
         <a class="dropdown-item py-2" href="{{ path('ajoutCategorie') }}">Créer une catégorie</a>
         <a class="dropdown-item py-2" href="{{ path('listeCategorie') }}">Liste des catégories</a>
+        <a class="dropdown-item py-2" href="{{ path('addMatiere') }}">Ajouter une matière</a>
+        <a class="dropdown-item py-2" href="{{ path('listeMatiere') }}">Liste des matières</a>
         <a class="dropdown-item py-2" href="{{ path('gestionCommande') }}">Gérez les commandes</a>
         <div class="text-center mt-5">
             <a class="btn btn-sm btn-dark" href="{{ path('home') }}">Quitter le panel</a>
         </div>
     </section>
     <section class="body col-10 pt-4">
-        {% block body %}
+        <div class="col-10">
 
-        {% endblock %}
+            {% block body %}
+
+            {% endblock %}
+
+        </div>
     </section>
 </main>
 {% block javascripts %}

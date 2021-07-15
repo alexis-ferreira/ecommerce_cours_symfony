@@ -80,3 +80,105 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     margin-left: -5px;
     margin-top: -1px;
 }
+
+.first {
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.first > a {
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.previous {
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
+
+
+}
+
+.previous > a {
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.page {
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.current {
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.page > a {
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.current > a {
+    font-size: large;
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+}
+
+.next {
+
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
+
+
+}
+
+.last {
+
+    margin: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
+
+
+}
+
+.next > a {
+
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.last > a {
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}

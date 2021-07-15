@@ -3,18 +3,40 @@
 {% block body %}
     {% for message in app.flashes("success") %}
 
-        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+        <div class="alert alert-success col-md-6 mx-auto text-center">{{ message }}</div>
 
     {% endfor %}
-    {% for message in app.flashes("danger") %}
+    {% for message in app.flashes("error") %}
 
-        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+        <div class="alert alert-danger col-md-6 mx-auto text-center">{{ message }}</div>
 
     {% endfor %}
 
-    <div class="container bg-secondary text-center fs-3 mb-4">Historique de vos commandes</div>
+    <div class="container bg-secondary text-center fs-3 mb-4">Vos commandes</div>
     {% for commande in commandes %}
 
+        <div class="separator col-6 mx-auto bg-primary my-5" style="height: 1px"></div>
+        <div class="d-flex my-4">
+            <h4>Commande N°{{ commande.id }}</h4>
+            {% if commande.statut == 0 %}
+
+                <div class="col-3 ms-4">
+                    <span class="badge bg-light">En cours de traitement</span>
+                </div>
+            {% elseif commande.statut == 1 %}
+                <div class="col-3 ms-4">
+                    <span class="badge bg-info">En cours de préparation</span>
+                </div>
+            {% elseif commande.statut == 2 %}
+                <div class="col-3 ms-4">
+                    <span class="badge bg-info">En cours de livraison</span>
+                </div>
+            {% elseif commande.statut == 3 %}
+                <div class="col-3 ms-4">
+                    <span class="badge bg-success">Livré</span>
+                </div>
+            {% endif %}
+        </div>
         <div class="container-table col-10 mx-auto">
             <table class="table">
                 <thead>
@@ -38,7 +60,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="total col-10 mt-4 mx-auto d-flex justify-content-between">
+        <div class="total col-10 my-5 mx-auto d-flex justify-content-between">
             <div class="col-md-8 mt-2"><h4>Total de la commande : {{ commande.montantTotal }} €</h4></div>
         </div>
 

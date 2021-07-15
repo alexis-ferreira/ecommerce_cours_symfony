@@ -3,12 +3,12 @@
 {% block body %}
     {% for message in app.flashes("success") %}
 
-        <div class="alert alert-success col-md-6 mx-auto">{{ message }}</div>
+        <div class="alert alert-success col-md-6 mx-auto text-center">{{ message }}</div>
 
     {% endfor %}
-    {% for message in app.flashes("danger") %}
+    {% for message in app.flashes("error") %}
 
-        <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
+        <div class="alert alert-danger col-md-6 mx-auto text-center">{{ message }}</div>
 
     {% endfor %}
 
@@ -40,7 +40,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="total col-10 mt-4 mx-auto d-flex justify-content-between">
+        <div class="col-10 mt-4 mx-auto d-flex justify-content-between">
             <div class="col-md-8 mt-2">
                 <h4>Total de la commande : {{ commande.montantTotal }} €</h4>
 
@@ -67,6 +67,7 @@
                 {% endif %}
             </div>
         </div>
+        <div class="separator col-6 mx-auto bg-primary my-5" style="height: 1px"></div>
 
     {% endfor %}
 

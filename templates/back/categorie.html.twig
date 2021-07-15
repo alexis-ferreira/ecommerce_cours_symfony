@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block body %}
+    {% for message in app.flashes("success") %}
+
+        <div class="alert alert-success col-md-6 mx-auto text-center">{{ message }}</div>
+
+    {% endfor %}
+    {% for message in app.flashes("error") %}
+
+        <div class="alert alert-danger col-md-6 mx-auto text-center">{{ message }}</div>
+
+    {% endfor %}
 
     {{ form_start(form) }}
 

@@ -17,10 +17,12 @@ class FrontController extends AbstractController
 
     /**
      * @Route("/", name="home")
+     * @param ArticleRepository $articleRepository
+     * @return Response
      */
     public function home(ArticleRepository $articleRepository) //on injecte en dépendance le repository d'article pour pouvoir hériter des méthodes présentes dedans
     {
-        // le repository est obligatoirement appelé pour les requete de SELECT
+        // le repository est obligatoirement appelé pour les requetes de SELECT
 
         $articles=$articleRepository->findAll();
 
@@ -35,6 +37,8 @@ class FrontController extends AbstractController
 
     /**
      * @Route ("/panier", name="panier")
+     * @param PanierService $panierService
+     * @return Response
      */
     public function panier(PanierService $panierService)
     {

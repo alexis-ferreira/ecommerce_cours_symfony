@@ -22,42 +22,19 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('home') }}">Bijoujoux</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">ADMIN</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item py-2" href="{{ path('addArticle') }}">Ajouter un article</a>
-                            <a class="dropdown-item py-2" href="{{ path('listeArticle') }}">Liste des articles</a>
-                            <a class="dropdown-item py-2" href="{{ path('ajoutCategorie') }}">Créer une catégorie</a>
-                            <a class="dropdown-item py-2" href="{{ path('listeCategorie') }}">Liste des catégories</a>
-                            <a class="dropdown-item py-2" href="{{ path('gestionCommande') }}">Gérez les commandes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item py-2" href="#">Separated link</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div class="text-center py-5 border-bottom h1 mb-0">PANEL ADMINISTRATION</div>
 </header>
 
 <main class="col-md-12 d-flex">
     <section class="panel-menu col-2 bg-light me-4 pt-4" style="height: 100%; min-height: 600px">
-                <a class="dropdown-item py-2" href="{{ path('addArticle') }}">Ajouter un article</a>
-                <a class="dropdown-item py-2" href="{{ path('listeArticle') }}">Liste des articles</a>
-                <a class="dropdown-item py-2" href="{{ path('ajoutCategorie') }}">Créer une catégorie</a>
-                <a class="dropdown-item py-2" href="{{ path('listeCategorie') }}">Liste des catégories</a>
-                <a class="dropdown-item py-2" href="{{ path('gestionCommande') }}">Gérez les commandes</a>
+        <a class="dropdown-item py-2" href="{{ path('addArticle') }}">Ajouter un article</a>
+        <a class="dropdown-item py-2" href="{{ path('listeArticle') }}">Liste des articles</a>
+        <a class="dropdown-item py-2" href="{{ path('ajoutCategorie') }}">Créer une catégorie</a>
+        <a class="dropdown-item py-2" href="{{ path('listeCategorie') }}">Liste des catégories</a>
+        <a class="dropdown-item py-2" href="{{ path('gestionCommande') }}">Gérez les commandes</a>
+        <div class="text-center mt-5">
+            <a class="btn btn-sm btn-dark" href="{{ path('home') }}">Quitter le panel</a>
+        </div>
     </section>
     <section class="body col-10 pt-4">
         {% block body %}

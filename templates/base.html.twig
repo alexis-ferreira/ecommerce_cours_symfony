@@ -18,6 +18,7 @@
               integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
               crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/script.js') }}">
     {% endblock %}
 </head>
 <body>
@@ -37,8 +38,16 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <a class="nav-link" href="{{ path('panier') }}">Panier</a>
+                    <li>
+                        <a class="nav-link" href="{{ path('mailForm') }}">Nous contacter</a>
+                    </li>
                 </ul>
+            </div>
+            <div class="me-5">
+                <form class="d-flex" method="get" action="{{ path('search') }}">
+                    <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
             </div>
 
             {% if not app.user %}
@@ -65,15 +74,10 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
                     <div class="dropdown-menu">
-                        <div class="cart border-top border-bottom mx-2">
-                            <div class="cart-logo mt-2">
-                                <i class="fas fa-shopping-cart"></i>
-                                Panier
-                            </div>
-                            <div class="content-cart p-2">
-                                Votre panier est vide.
-                            </div>
-                        </div>
+                        <a class="dropdown-item py-2" href="{{ path('panier') }}">
+                            Panier
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
                         <a class="dropdown-item py-2" href="{{ path('logout') }}">Votre profil</a>
                         <a class="dropdown-item py-2" href="{{ path('listeCommande') }}">Vos commandes</a>
                         {% if is_granted('ROLE_ADMIN') %}

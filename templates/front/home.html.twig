@@ -14,15 +14,40 @@
         <div class="alert alert-danger col-md-6 mx-auto">{{ message }}</div>
 
     {% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-10 alert alert-primary text-white">
+            <form action="{{ path('home') }}" method="post" class="d-flex justify-content-center align-items-center">
+                <div class="form-group col-3">
+                    <label for="">Filtrer par catégorie</label>
+                    <select class="form-select" name="categorie" id="categorie">
+                        <option value="all">Catégorie</option>
+                        {% for categorie in categories %}
+                            <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="ms-5">
+                    <label for="">Votre budget</label>
+                    <div class="range-wrap mt-3 ms-3" id="rw">
+                        <div class="range-value" id="rangeV"></div>
+                        <input id="range" name="prixmax" type="range" min="50" max="1500" value="1500" step="50">
+                    </div>
+                </div>
+                <button class="btn btn-primary ms-5" type="submit" style="height: 50px;">Filtrer</button>
+            </form>
+        </div>
+    </div>
+
     <div class="row justify-content-start">
         {% for article in articles %}
             <div class="col-md-3 mb-4">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.nom }}</h5>
+                        <h5 class="card-title" style="min-height: 38px">{{ article.nom }}</h5>
                         <div class="border border-dark"></div>
                     </div>
-                    <img src="{{ asset('upload/') }}{{ article.photo }}" alt="">
+                    <img class="mx-auto" height="250px" width="250px" src="{{ asset('upload/') }}{{ article.photo }}" alt="">
                     <div class="card-body">
                         <div class="btn-group-vertical">
                             <button type="button" class="btn btn-primary">
@@ -39,5 +64,44 @@
             </div>
         {% endfor %}
     </div>
+    <script>
+        const
+            range = document.getElementById('range'),
+            rangeV = document.getElementById('rangeV'),
+            setValue = () => {
+                const
+                    newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
+                    newPosition = 10 - (newValue * 0.2);
+                rangeV.innerHTML = `<span>${range.value}</span>`;
+                rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+                rangeV.style.opacity = "0";
+
+            };
+
+        let inputCircle = document.getElementById('rw');
+        console.log(inputCircle);
+
+        inputCircle.addEventListener('mouseenter', function(){
+
+            rangeV.style.opacity = "1";
+            rangeV.style.transition = "opacity 500ms";
+
+        });
+
+        inputCircle.addEventListener('click', function(){
+
+            rangeV.style.opacity = "1";
+            rangeV.style.transition = "opacity 500ms";
+
+        });
+
+        inputCircle.addEventListener('mouseleave', function(){
+
+            rangeV.style.opacity = "0";
+        });
+        document.addEventListener("DOMContentLoaded", setValue);
+        range.addEventListener('input', setValue);
+
+    </script>
 {% endblock %}
 
